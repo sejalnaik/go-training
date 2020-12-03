@@ -1,0 +1,20 @@
+package main
+
+import "fmt"
+
+func main() {
+	var price int = 100
+	fmt.Println("Price is ", price, " dollars")
+
+	var taxrate float64 = 0.08
+	var tax float64 = float64(price) * taxrate
+	fmt.Println("Tax is ", tax, " dollars")
+
+	var total float64 = float64(price) + tax
+	fmt.Println("Total cost is ", total)
+
+	var availableFunds int = 120
+	fmt.Println(availableFunds, " dollars available")
+	fmt.Println("Within budget? ", total <= float64(availableFunds))
+
+}
