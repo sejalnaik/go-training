@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"os"
 	"path/filepath"
@@ -8,6 +9,7 @@ import (
 )
 
 var isAdded bool = false
+var space string = "  "
 
 func main() {
 
@@ -33,6 +35,8 @@ func main() {
 		log.Fatal(err)
 	}
 
+	displayFolder(rootFolder)
+
 	/*fmt.Println(rootFolder.folderName)
 	fmt.Println(rootFolder)
 	for _, folder := range rootFolder.folders {
@@ -48,8 +52,20 @@ func main() {
 }
 
 func displayFolder(f *folder) {
+	space += "  "
+	fmt.Println(space, f.folderName)
+	if len(f.files) != 0 {
+		for i, file := range f.files {
+			fmt.Println(space, file.fileName)
+			if i == len(f.files)-1 {
+				space = space[:len(space)-1]
+			}
+		}
+	}
 	if len(f.folders) != 0 {
-
+		for _, folder := range f.folders {
+			displayFolder(folder)
+		}
 	}
 }
 
