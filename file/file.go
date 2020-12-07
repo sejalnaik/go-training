@@ -9,7 +9,7 @@ import (
 )
 
 var isAdded bool = false
-var space string = "  "
+var space string = ""
 
 func main() {
 
@@ -52,20 +52,29 @@ func main() {
 }
 
 func displayFolder(f *folder) {
-	space += "  "
+	//space += "  "
 	fmt.Println(space, f.folderName)
 	if len(f.files) != 0 {
-		for i, file := range f.files {
+		space += "  "
+		for _, file := range f.files {
 			fmt.Println(space, file.fileName)
-			if i == len(f.files)-1 {
-				space = space[:len(space)-1]
-			}
+			/*if i == len(f.files)-1 {
+				space = space[0 : len(space)-2]
+			}*/
 		}
+	}
+	if len(f.files) != 0 && len(f.folders) == 0 {
+		space = space[0 : len(space)-2]
+		return
+	}
+	if len(f.files) == 0 && len(f.folders) != 0 {
+		space += "  "
 	}
 	if len(f.folders) != 0 {
 		for _, folder := range f.folders {
 			displayFolder(folder)
 		}
+		space = space[0 : len(space)-2]
 	}
 }
 
